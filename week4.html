@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adrian Saltos Salazar | IT Professional & Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:    #0f1f3d;
+      --blue:    #1a3a6e;
+      --accent:  #c8a96e;
+      --light:   #e8edf5;
+      --white:   #f5f7fb;
+      --muted:   #8a97b0;
+      --text:    #1a2540;
+      --card:    #162040;
+      --border:  rgba(200,169,110,0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--light);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(15,31,61,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,58,110,0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(200,169,110,0.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--accent) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; max-width: 720px; }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--border); padding: 0.4rem 1rem; border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--white);
+      animation: fadeUp 0.6s 0.15s ease both;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-title {
+      font-size: 1.15rem; color: var(--muted); font-weight: 300;
+      margin: 1.2rem 0 0.6rem;
+      animation: fadeUp 0.6s 0.25s ease both;
+    }
+    .hero-sub {
+      font-size: 1rem; color: var(--light); max-width: 560px;
+      margin-bottom: 2.5rem; line-height: 1.8;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.45s ease both;
+    }
+    .btn {
+      padding: 0.9rem 2rem; font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      border-radius: 3px; cursor: pointer; text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--navy);
+      border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-outline {
+      background: transparent; color: var(--light);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--muted); font-size: 0.75rem; letter-spacing: 0.1em;
+      animation: fadeUp 0.6s 0.6s ease both;
+    }
+    .scroll-line {
+      width: 1px; height: 40px; background: linear-gradient(var(--accent), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700;
+      color: var(--white); line-height: 1.15; margin-bottom: 1rem;
+    }
+    .section-divider {
+      width: 60px; height: 2px;
+      background: var(--accent); margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: rgba(22,32,64,0.4); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start;
+    }
+    .about-left { position: relative; }
+    .about-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2.5rem; border-radius: 4px;
+    }
+    .about-card h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.3rem;
+      color: var(--accent); margin-bottom: 1.5rem;
+    }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.88rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: var(--muted); }
+    .info-value { color: var(--light); font-weight: 500; }
+    .about-text p {
+      color: var(--muted); line-height: 1.9; margin-bottom: 1.3rem; font-size: 0.97rem;
+    }
+    .about-text p strong { color: var(--light); font-weight: 600; }
+    .principle-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .chip {
+      font-size: 0.78rem; padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border); border-radius: 2px;
+      color: var(--accent); font-family: 'DM Mono', monospace;
+    }
+
+    /* ── PRINCIPLES ── */
+    #principles { }
+    .principles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .principle-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2.5rem; border-radius: 4px;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .principle-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+    .principle-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--accent);
+    }
+    .principle-num {
+      font-family: 'Playfair Display', serif; font-size: 3.5rem;
+      color: rgba(200,169,110,0.12); font-weight: 900; line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .principle-card h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      color: var(--white); margin-bottom: 0.8rem;
+    }
+    .principle-scripture {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      color: var(--accent); margin-bottom: 1rem; line-height: 1.5;
+    }
+    .principle-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
+
+    /* ── SKILLS ── */
+    #skills { background: rgba(22,32,64,0.4); }
+    .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem; }
+    .skill-group {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2rem; border-radius: 4px;
+    }
+    .skill-group h3 {
+      font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      font-size: 0.82rem; padding: 0.3rem 0.8rem;
+      background: rgba(200,169,110,0.08); border: 1px solid var(--border);
+      color: var(--light); border-radius: 2px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { }
+    .projects-list { display: flex; flex-direction: column; gap: 2.5rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2.5rem; border-radius: 4px; display: grid;
+      grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start;
+      transition: border-color 0.3s;
+    }
+    .project-card:hover { border-color: var(--accent); }
+    .project-meta { }
+    .project-num {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.8rem;
+    }
+    .project-meta h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem;
+      color: var(--white); margin-bottom: 0.5rem; line-height: 1.3;
+    }
+    .project-org { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .project-date { color: var(--muted); font-size: 0.82rem;
+      font-family: 'DM Mono', monospace; }
+    .project-body p { color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 1rem; }
+    .project-faith {
+      background: rgba(200,169,110,0.06); border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem; margin: 1.2rem 0; border-radius: 0 3px 3px 0;
+    }
+    .project-faith span {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--accent); letter-spacing: 0.1em; display: block; margin-bottom: 0.4rem;
+    }
+    .project-faith p { color: var(--light); font-size: 0.88rem; margin: 0; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .tech-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      padding: 0.25rem 0.65rem; background: rgba(26,58,110,0.6);
+      border: 1px solid rgba(200,169,110,0.2); color: var(--muted); border-radius: 2px;
+    }
+
+    /* ── ETHICS ── */
+    #ethics { background: rgba(22,32,64,0.4); }
+    .ethics-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 3rem; border-radius: 4px; max-width: 860px;
+    }
+    .ethics-card h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.4rem;
+      color: var(--white); margin-bottom: 1.5rem;
+    }
+    .ethics-section { margin-bottom: 2rem; }
+    .ethics-section h4 {
+      font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .ethics-section p { color: var(--muted); font-size: 0.92rem; line-height: 1.85; }
+    .ethics-section ul { padding-left: 1.4rem; }
+    .ethics-section ul li { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.4rem; }
+
+    /* ── REFLECTION ── */
+    #reflection { }
+    .reflection-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 3rem; border-radius: 4px; max-width: 860px;
+      position: relative; overflow: hidden;
+    }
+    .reflection-card::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif; font-size: 10rem;
+      color: rgba(200,169,110,0.06); position: absolute;
+      top: -2rem; left: 1rem; line-height: 1;
+    }
+    .reflection-card p {
+      color: var(--muted); font-size: 0.95rem; line-height: 1.95;
+      margin-bottom: 1.4rem; position: relative;
+    }
+    .reflection-card p:last-child { margin-bottom: 0; }
+
+    /* ── RESUME ── */
+    #resume { background: rgba(22,32,64,0.4); }
+    .resume-download {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: var(--card); border: 1px solid var(--border);
+      padding: 1.5rem 2.5rem; border-radius: 4px;
+      color: var(--light); text-decoration: none; font-weight: 500;
+      transition: border-color 0.3s, color 0.3s; margin-bottom: 3rem;
+    }
+    .resume-download:hover { border-color: var(--accent); color: var(--accent); }
+    .resume-section { margin-bottom: 2.5rem; }
+    .resume-section-title {
+      font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; margin-bottom: 1.5rem;
+    }
+    .resume-entry { margin-bottom: 1.8rem; }
+    .resume-entry-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 0.3rem; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .resume-entry h4 { color: var(--white); font-size: 0.97rem; font-weight: 600; }
+    .resume-entry-date {
+      font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent);
+    }
+    .resume-entry-org { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.6rem; }
+    .resume-entry ul { padding-left: 1.3rem; }
+    .resume-entry ul li { color: var(--muted); font-size: 0.88rem; line-height: 1.75; margin-bottom: 0.25rem; }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center; padding: 6rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 1.8rem; border: 1px solid var(--border);
+      color: var(--muted); text-decoration: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 500; transition: all 0.25s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-note {
+      margin-top: 3rem; color: var(--muted); font-size: 0.82rem;
+      font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      color: var(--muted); font-size: 0.8rem;
+    }
+
+    /* ── AGENCY REFLECTION ── */
+    #agency { background: rgba(22,32,64,0.4); }
+    .agency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .agency-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2.5rem; border-radius: 4px; position: relative; overflow: hidden;
+    }
+    .agency-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .agency-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem;
+      color: var(--white); margin-bottom: 0.6rem; }
+    .agency-card .scripture { font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--accent); letter-spacing: 0.08em; margin-bottom: 1rem; }
+    .agency-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.85; }
+    .agency-video-note {
+      background: rgba(200,169,110,0.07); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); padding: 1.2rem 1.5rem;
+      border-radius: 0 4px 4px 0; margin-top: 2.5rem; max-width: 700px;
+    }
+    .agency-video-note span { font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--accent); letter-spacing: 0.1em; display: block; margin-bottom: 0.4rem; }
+    .agency-video-note p { color: var(--light); font-size: 0.9rem; line-height: 1.75; margin: 0; }
+
+    /* ── SPIRITUAL EXPANSION ── */
+    #spiritual { }
+    .spiritual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+    .spiritual-item {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2rem; border-radius: 4px; transition: border-color 0.3s;
+    }
+    .spiritual-item:hover { border-color: var(--accent); }
+    .spiritual-item .s-label { font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .spiritual-item h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      color: var(--white); margin-bottom: 0.5rem; }
+    .spiritual-item .s-ref { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-bottom: 0.8rem; }
+    .spiritual-item p { color: var(--muted); font-size: 0.87rem; line-height: 1.8; }
+    .competency-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 1rem; }
+    .competency-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 1.8rem; border-radius: 4px; text-align: center;
+    }
+    .competency-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .competency-card h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem;
+      color: var(--accent); margin-bottom: 0.5rem; }
+    .competency-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.7; }
+
+    /* ── ETHICAL ALTERNATIVE ── */
+    #ethics-alt { background: rgba(22,32,64,0.4); }
+    .alt-card { background: var(--card); border: 1px solid var(--border);
+      padding: 3rem; border-radius: 4px; max-width: 900px; }
+    .alt-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem;
+      color: var(--white); margin-bottom: 2rem; }
+    .principles-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .principle-badge { background: rgba(200,169,110,0.1); border: 1px solid var(--border);
+      padding: 0.5rem 1.1rem; border-radius: 2px; font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; color: var(--accent); letter-spacing: 0.08em; }
+    .alt-section { margin-bottom: 2rem; }
+    .alt-section h4 { font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .alt-section p { color: var(--muted); font-size: 0.92rem; line-height: 1.85; margin-bottom: 0.8rem; }
+    .alt-section ul { padding-left: 1.4rem; }
+    .alt-section ul li { color: var(--muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 0.4rem; }
+    .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .outcome-card { padding: 1.2rem 1.5rem; border-radius: 3px; font-size: 0.88rem; line-height: 1.7; }
+    .outcome-card.bad { background: rgba(180,40,40,0.08); border-left: 3px solid rgba(200,80,80,0.5); color: var(--muted); }
+    .outcome-card.good { background: rgba(40,140,80,0.08); border-left: 3px solid rgba(60,180,100,0.5); color: var(--muted); }
+    .outcome-card strong { display: block; margin-bottom: 0.4rem; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+    .outcome-card.bad strong { color: rgba(220,100,100,0.9); }
+    .outcome-card.good strong { color: rgba(80,200,120,0.9); }
+
+    /* ── PROJECT REFINEMENT REPORT ── */
+    #refinement { }
+    .refinement-intro { background: var(--card); border: 1px solid var(--border);
+      padding: 2rem 2.5rem; border-radius: 4px; margin-bottom: 2.5rem; max-width: 860px; }
+    .refinement-intro p { color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 0.8rem; }
+    .refinement-intro p:last-child { margin-bottom: 0; }
+    .refinement-grid { display: flex; flex-direction: column; gap: 1.5rem; max-width: 900px; }
+    .refinement-item { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .refinement-header { padding: 1.2rem 1.8rem; display: flex; align-items: center;
+      gap: 1.2rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
+    .refinement-header:hover { background: rgba(200,169,110,0.04); }
+    .ref-num { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); min-width: 28px; }
+    .ref-title { font-weight: 600; font-size: 0.95rem; color: var(--white); flex: 1; }
+    .ref-badge { font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      padding: 0.2rem 0.7rem; border-radius: 2px; letter-spacing: 0.08em; }
+    .ref-badge.security { background: rgba(200,169,110,0.1); color: var(--accent); border: 1px solid var(--border); }
+    .ref-badge.ethics  { background: rgba(60,120,200,0.1);  color: #6eacda; border: 1px solid rgba(110,172,218,0.2); }
+    .ref-badge.access  { background: rgba(80,180,100,0.1);  color: #6ec97e; border: 1px solid rgba(110,200,130,0.2); }
+    .ref-badge.infra   { background: rgba(180,80,200,0.1);  color: #c07ed4; border: 1px solid rgba(180,120,200,0.2); }
+    .refinement-body { padding: 1.5rem 1.8rem; display: none; }
+    .refinement-body.open { display: block; }
+    .diff-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .diff-before, .diff-after { padding: 0.9rem 1.1rem; border-radius: 3px; font-size: 0.85rem; line-height: 1.7; }
+    .diff-before { background: rgba(180,40,40,0.08); border-left: 3px solid rgba(200,80,80,0.4); }
+    .diff-after  { background: rgba(40,140,80,0.08);  border-left: 3px solid rgba(60,180,100,0.4); }
+    .diff-label { font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; display: block; }
+    .diff-before .diff-label { color: rgba(220,100,100,0.8); }
+    .diff-after  .diff-label { color: rgba(80,200,120,0.8); }
+    .diff-before p, .diff-after p { color: var(--muted); margin: 0; }
+    .ref-rationale { color: var(--muted); font-size: 0.88rem; line-height: 1.8; margin-top: 0.5rem;
+      padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ── HAMBURGER BUTTON ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+      z-index: 200;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 140;
+    }
+    .nav-overlay.open { display: block; }
+
+    /* ── RESPONSIVE — TABLET ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: min(75vw, 300px);
+        height: 100dvh;
+        background: rgba(10,20,50,0.97);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+        padding: 5rem 2.5rem 3rem;
+        border-left: 1px solid var(--border);
+        transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+        z-index: 150;
+        list-style: none;
+      }
+      .nav-links.open { right: 0; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        font-size: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(200,169,110,0.1);
+        letter-spacing: 0.06em;
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+
+      section { padding: 4rem 1.5rem; }
+      #home { padding: 7rem 1.5rem 4rem; }
+      #contact { padding: 4rem 1.5rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: 1fr; gap: 1.5rem; }
+
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+      .hero-cta .btn { text-align: center; min-width: 200px; }
+
+      .agency-grid { grid-template-columns: 1fr; }
+      .spiritual-grid { grid-template-columns: 1fr; }
+      .competency-grid { grid-template-columns: 1fr; }
+      .outcome-grid { grid-template-columns: 1fr; }
+      .diff-row { grid-template-columns: 1fr; }
+      .alt-card, .refinement-intro { padding: 2rem 1.5rem; }
+      .refinement-header { flex-wrap: wrap; gap: 0.6rem; }
+
+
+      .contact-links { flex-direction: column; align-items: center; }
+
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    /* ── RESPONSIVE — MOBILE ── */
+    @media (max-width: 480px) {
+      nav { padding: 0.9rem 1.2rem; }
+      .nav-logo { font-size: 1rem; }
+
+      section { padding: 3.5rem 1.2rem; }
+      #home { padding: 6rem 1.2rem 3.5rem; }
+      #contact { padding: 3.5rem 1.2rem; }
+
+      .hero-tag { font-size: 0.7rem; padding: 0.3rem 0.75rem; }
+      .hero-sub { font-size: 0.93rem; }
+
+      .section-title { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+      .section-divider { margin-bottom: 2rem; }
+
+      .principle-card { padding: 2rem 1.4rem; }
+      .principle-num { font-size: 2.8rem; }
+      .skill-group { padding: 1.5rem 1.2rem; }
+      .about-card { padding: 1.8rem 1.4rem; }
+
+      .project-card { padding: 1.8rem 1.2rem; }
+      .project-faith { padding: 0.8rem 1rem; }
+
+      .ethics-card, .reflection-card { padding: 1.8rem 1.2rem; }
+
+      .resume-entry-header { flex-direction: column; gap: 0.15rem; }
+      .resume-download { padding: 1.2rem 1.8rem; }
+
+      .btn { padding: 0.85rem 1.5rem; font-size: 0.82rem; width: 100%; }
+      .hero-cta .btn { min-width: unset; }
+
+      .contact-link { width: 100%; max-width: 280px; justify-content: center; }
+
+      footer { padding: 1.5rem 1.2rem; font-size: 0.75rem; }
+    }
+
+    /* ── WEEK NAV BANNER ── */
+    .week-nav-banner {
+      background: rgba(200,169,110,0.07);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.8rem;
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    }
+    .week-nav-banner .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+    .week-nav-banner .week-links { display: flex; gap: 0.6rem; }
+    .week-pill {
+      padding: 0.35rem 1rem; border-radius: 2px; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase;
+      transition: all 0.2s; border: 1px solid var(--border); color: var(--muted);
+    }
+    .week-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
+    @media (max-width: 480px) {
+      .week-nav-banner { padding: 0.6rem 1.2rem; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">A. Saltos</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">← Week 3</a></li>
+    <li><a href="#spiritual">Spiritual</a></li>
+    <li><a href="#agency">Agency</a></li>
+    <li><a href="#ethics-alt">Alt. Approach</a></li>
+    <li><a href="#refinement">Refinement</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+    <li><a href="#resume">Résumé</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- WEEK BANNER -->
+<div class="week-nav-banner">
+  <span class="week-label">IT 497 Capstone Portfolio</span>
+  <div class="week-links">
+    <a href="index.html" class="week-pill">Week 3</a>
+    <a href="week4.html" class="week-pill active">Week 4</a>
+  </div>
+</div>
+
+<!-- HERO W4 -->
+<section id="home" style="min-height:45vh;display:flex;align-items:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content" style="position:relative;max-width:720px;">
+    <div class="hero-tag">Week 4 · IT 497 Capstone</div>
+    <h1 class="hero-name" style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.05;color:var(--white);">Week 4<br><span style="color:var(--accent);">Portfolio</span></h1>
+    <p style="font-size:1rem;color:var(--muted);font-weight:300;margin:1.2rem 0 0.6rem;">Spiritual Growth · Agency · Ethics · Project Refinement · Reflection</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+      <a href="#spiritual" class="btn btn-primary">Explore Week 4</a>
+      <a href="index.html" class="btn btn-outline">← Back to Week 3</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- SPIRITUAL EXPANSION (Week 4 – Task 2) -->
+<section id="spiritual">
+  <div class="section-inner">
+    <div class="section-label">Week 4 — Spiritual Growth</div>
+    <h2 class="section-title">Expanded Spiritual Portfolio</h2>
+    <div class="section-divider"></div>
+    <div class="spiritual-grid">
+      <div class="spiritual-item">
+        <div class="s-label">New Material — Agency</div>
+        <h3>D&amp;C 58:26–28 — Anxious Engagement</h3>
+        <div class="s-ref">Doctrine &amp; Covenants 58:26–28</div>
+        <p>"Verily I say, men should be anxiously engaged in a good cause... for the power is in them, wherein they are agents unto themselves." This scripture reframes professional ambition as a spiritual calling. The initiative I show in refining the PromisedLand deployment — going beyond the original requirements — is an expression of righteous agency, not just professional diligence.</p>
+      </div>
+      <div class="spiritual-item">
+        <div class="s-label">New Material — Peace in Uncertainty</div>
+        <h3>"Come What May, and Love It"</h3>
+        <div class="s-ref">Elder Joseph B. Wirthlin, General Conference 2008</div>
+        <p>Elder Wirthlin's counsel to find peace in adversity speaks directly to my immigration experience and the uncertainty of building a new career in a new country. Learning to respond to setbacks with faith rather than fear has been the most important professional skill I have developed — and it came from the gospel, not from any IT course.</p>
+      </div>
+      <div class="spiritual-item">
+        <div class="s-label">New Material — Courage</div>
+        <h3>"Be Not Afraid, Only Believe"</h3>
+        <div class="s-ref">Elder Neil L. Andersen, General Conference 2021</div>
+        <p>Elder Andersen's teaching that faith in Jesus Christ replaces fear with confidence connects to every professional risk I have taken: moving to the U.S., enrolling at Ensign College, pivoting into full-stack development. Each step required "be not afraid" as an active posture, not just a comforting phrase.</p>
+      </div>
+      <div class="spiritual-item">
+        <div class="s-label">New Material — Collaboration</div>
+        <h3>Problem-Solving and Collaboration</h3>
+        <div class="s-ref">BYU-Idaho Leadership Toolkit</div>
+        <p>The principle that the best solutions emerge from collaborative problem-solving aligns with the Latter-day Saint emphasis on councils and companionships. In IT, the best systems are built by teams, not lone developers. My bilingual communication skills are a stewardship in this context.</p>
+      </div>
+      <div class="spiritual-item">
+        <div class="s-label">Deepened — Temple</div>
+        <h3>Temple Covenants as Professional Foundation</h3>
+        <div class="s-ref">Personal Experience — Bountiful Utah Temple</div>
+        <p>This week's temple attendance deepened my understanding of the covenant of consecration. As a temple worker, I give time and effort in service to others without compensation or recognition. That pattern — diligent service freely given — is the model I want for my professional life. AI systems built with that spirit serve people first, profit second.</p>
+      </div>
+      <div class="spiritual-item">
+        <div class="s-label">Deepened — Single Eye</div>
+        <h3>3 Nephi 13:19–22 — The Single Eye</h3>
+        <div class="s-ref">3 Nephi 13:19–22</div>
+        <p>"If therefore thine eye be single, thy whole body shall be full of light." The single-eye principle — undivided focus on what truly matters — is the antidote to the distracted, ethically compromised professional. Integrity requires that my professional eye be single toward serving people well.</p>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:3rem;">Professional Competencies Aligned to Spiritual Beliefs</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin:0.5rem 0 2rem;">How My IT Skills Reflect Gospel Principles</h3>
+    <div class="competency-grid">
+      <div class="competency-card">
+        <div class="competency-icon">🛡️</div>
+        <h4>Security &amp; Integrity</h4>
+        <p>Eight years of privileged access without misuse is not a technical achievement — it is a spiritual one. Security hardening is Matthew 5:16 in action: let your light shine through work no one sees.</p>
+      </div>
+      <div class="competency-card">
+        <div class="competency-icon">🔧</div>
+        <h4>Systems Thinking &amp; Diligence</h4>
+        <p>Engineering taught me to trace cause and effect across complex systems. That systematic diligence is what Alma 37:35 calls for — learning wisdom through sustained effort over time.</p>
+      </div>
+      <div class="competency-card">
+        <div class="competency-icon">🌐</div>
+        <h4>Bilingual Communication &amp; Service</h4>
+        <p>Serving clients in English and Spanish is a form of consecration — using a gift shaped by a hard immigration experience in the service of others. Mosiah 2:17 made professional.</p>
+      </div>
+      <div class="competency-card">
+        <div class="competency-icon">⚙️</div>
+        <h4>Automation &amp; Agency</h4>
+        <p>Building automation tools that free people from repetitive tasks is D&amp;C 58:27 applied — helping others be "anxiously engaged" in good causes by removing friction from their best work.</p>
+      </div>
+      <div class="competency-card">
+        <div class="competency-icon">📊</div>
+        <h4>Database Management &amp; Stewardship</h4>
+        <p>Data represents real people who trusted an organization with their information. Managing databases with integrity and proper access controls is an act of stewardship over that trust.</p>
+      </div>
+      <div class="competency-card">
+        <div class="competency-icon">🤝</div>
+        <h4>Collaboration &amp; Leadership</h4>
+        <p>The LDS principle of councils shapes how I approach IT teams. I lead by listening, contribute by serving, and build solutions that outlast my involvement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENCY REFLECTION (Week 4 – Task 1) -->
+<section id="agency">
+  <div class="section-inner">
+    <div class="section-label">Week 4 — Task 1 · Temple Reflection</div>
+    <h2 class="section-title">Agency &amp; Development Journey</h2>
+    <div class="section-divider"></div>
+    <div class="agency-grid">
+      <div class="agency-card">
+        <h3>What Agency Has Built</h3>
+        <div class="scripture">D&amp;C 58:26–28 — "The power is in them, wherein they are agents unto themselves."</div>
+        <p>Looking back at my development journey, the turning points were not the ones that happened to me — they were the ones I chose. Choosing to stay in IT during uncertain employment in Ecuador. Choosing to move to a new country. Choosing Ensign College when I could have stopped learning. Choosing to serve in the temple when weekends are precious. Each of those choices compounded. The professional I am today is the sum of those decisions, not the product of my circumstances.</p>
+        <p style="margin-top:1rem;">D&amp;C 58:27 does not say the Lord will make things happen for those who wait. It says men should be anxiously engaged — the power to act is already in us. That teaching reframes my entire career narrative: I was not lucky. I was faithful. I acted. And the Lord honored those actions.</p>
+      </div>
+      <div class="agency-card">
+        <h3>Temple Reflection This Week</h3>
+        <div class="scripture">Bountiful Utah Temple — Weekly Service as Temple Workers</div>
+        <p>This week's temple attendance, combined with the D&amp;C 58 focus on agency, created a distinctive insight: agency and covenant are not opposites — they are partners. In the temple, my wife and I make covenants freely. No one compels us. We choose, week after week, to give our time as temple workers because we believe the covenants made there are the most important work being done on earth.</p>
+        <p style="margin-top:1rem;">That understanding reshapes how I think about professional agency too. The most meaningful work I do will be freely chosen, covenant-driven, and oriented toward others — not just toward career advancement. IT skills in the service of consecrated purpose are what I am building toward in this portfolio.</p>
+      </div>
+    </div>
+    <div class="agency-video-note">
+      <span>📹 Video Response — Submitted Separately via Course Platform</span>
+      <p>A 2.5–5 minute video response capturing these reflections on agency, the development journey, and the integration of spiritual and professional principles has been recorded and submitted through the Canvas course platform per Week 4 instructions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ETHICAL ALTERNATIVE (Week 4 – Task 3) -->
+<section id="ethics-alt">
+  <div class="section-inner">
+    <div class="section-label">Week 4 — Task 3 · Ethical Dilemma</div>
+    <h2 class="section-title">Alternative Ethical Approach</h2>
+    <div class="section-divider"></div>
+    <div class="alt-card">
+      <h3>Misuse of Administrative Privileges — A Better Path Forward</h3>
+      <div class="alt-section">
+        <h4>Essential Ethical Principles</h4>
+        <div class="principles-row">
+          <span class="principle-badge">Honesty</span>
+          <span class="principle-badge">Accountability</span>
+          <span class="principle-badge">Fairness</span>
+          <span class="principle-badge">Respect for Persons</span>
+          <span class="principle-badge">Responsibility</span>
+          <span class="principle-badge">Transparency</span>
+        </div>
+        <p>The administrator's actions violated all six principles simultaneously. He was not honest about how he used his access. He avoided accountability for 18 months. He was not fair to colleagues whose private data he accessed without consent. He showed no respect for the persons whose information he treated as available to his curiosity. He abdicated professional responsibility and operated in deliberate opacity.</p>
+      </div>
+      <div class="alt-section">
+        <h4>The Alternative Approach</h4>
+        <ul>
+          <li><strong>Stop at the boundary.</strong> Recognize that accessing employee PII has no legitimate business justification for his role and choose not to proceed — not because monitoring would catch him, but because it is wrong.</li>
+          <li><strong>Report the capability gap.</strong> Instead of exploiting the absence of PAM controls, surface that gap to management: "My credentials give me access beyond my assigned scope. This is a security risk. Here is my recommendation."</li>
+          <li><strong>Advocate for ethical culture.</strong> Use professional standing that comes with elevated access to push for stronger accountability mechanisms — because it protects the organization and the people it serves.</li>
+        </ul>
+      </div>
+      <div class="alt-section">
+        <h4>Why This Alternative Is Better — Outcomes for Everyone</h4>
+        <div class="outcome-grid">
+          <div class="outcome-card bad">
+            <strong>What Actually Happened</strong>
+            Hundreds of employees had PII exposed. The administrator faced criminal charges. The organization lost trust, faced regulatory scrutiny, and spent significant resources on forensic investigation. The 18-month gap revealed a culture that normalized unchecked privileged access.
+          </div>
+          <div class="outcome-card good">
+            <strong>With the Ethical Alternative</strong>
+            Employee dignity and privacy are protected. The administrator builds a reputation as a trusted professional. The organization gains a more secure architecture. A culture of proactive accountability replaces reactive damage control. The administrator's career is built on a foundation of trust that sustains long-term growth.
+          </div>
+        </div>
+        <p style="margin-top:1.2rem;color:var(--muted);font-size:0.9rem;line-height:1.85;">The alternative approach is not harder — it is simply a choice to treat integrity as a professional standard rather than an optional virtue. The administrator who reports the access gap is not sacrificing anything real. He is investing in the kind of professional reputation and organizational culture that creates durable, meaningful work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT REFINEMENT REPORT (Week 4 – Task 4) -->
+<section id="refinement">
+  <div class="section-inner">
+    <div class="section-label">Week 4 — Task 4 · IT Project</div>
+    <h2 class="section-title">Project Refinement Report</h2>
+    <div class="section-divider"></div>
+    <div class="refinement-intro">
+      <p>The project selected for refinement is the <strong>Full Office Deployment Proposal</strong> originally developed in IT 235 — a complete Windows Server 2022 Datacenter deployment for PromisedLand.com, a hybrid call center and tourist guide operation with 45 employees in Laie, Hawaii.</p>
+      <p>Returning to this project through IT 497 revealed that technical competence alone is insufficient. The original proposal documented <em>what</em> to install but did not ask who the system serves or what the human consequences of failures would be. Click each refinement to expand the before/after detail.</p>
+    </div>
+    <div class="refinement-grid">
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">01</span><span class="ref-title">RDP Security — MFA, VPN Tunnel &amp; Lockout Policy</span>
+          <span class="ref-badge security">Security</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>RDP on default port 3389 with no MFA, IP restrictions, or lockout policy.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>Non-standard port (33899), NLA, MFA via Microsoft Authenticator, VPN tunnel requirement, 5-attempt lockout policy.</p></div>
+          </div>
+          <p class="ref-rationale">Port 3389 is one of the most actively scanned ports on the internet. Automated brute-force tools continuously probe it — this configuration was a front door for ransomware. The refinement closes that door without impeding legitimate remote access.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">02</span><span class="ref-title">Tiered RTO/RPO Recovery Matrix</span>
+          <span class="ref-badge infra">Infrastructure</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>Single undefined RTO; RPO 60 sec via StorageCraft. No tier differentiation.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>Tier 1 (Call Center): RTO 15 min/RPO 5 min. Tier 2 (Admin): 2hr/30 min. Tier 3 (Archive): 24hr/24hr. Hot standby via ShadowXafe.</p></div>
+          </div>
+          <p class="ref-rationale">For a 45-person call center, every minute of downtime has direct revenue impact. The tiered framework aligns recovery investment with business criticality and provides honest, measurable commitments.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">03</span><span class="ref-title">AD — 4-Tier RBAC, LAPS &amp; JIT Access</span>
+          <span class="ref-badge access">Access Control</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>Principle of Least Privilege stated conceptually. No GPO, RBAC structure, or PAM rules documented.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>4-tier AD roles. Microsoft LAPS for local admin password rotation. JIT access for all elevated ops. SIEM logging of all privileged actions.</p></div>
+          </div>
+          <p class="ref-rationale">Directly informed by the Week 2 ethical dilemma: an administrator who abused access for 18 months because there were no PAM controls. Stating PoLP without implementing it is documentation theater. This refinement makes the commitment real.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">04</span><span class="ref-title">IIS Certificate Lifecycle Management</span>
+          <span class="ref-badge security">Security</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>Certificate installed on IIS. No CA hierarchy, renewal workflow, or expiry monitoring.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>AD CS root CA + intermediate issuing CA. Auto-renewal via GPO. Let's Encrypt + win-acme for public services. 60-day expiry alerts.</p></div>
+          </div>
+          <p class="ref-rationale">An expired certificate causes immediate service outages and security warnings. In a call center dependent on web-based tools, certificate expiry causes real operational disruption. Automation removes the human dependency that causes most expiry incidents.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">05</span><span class="ref-title">4-VLAN Network Segmentation</span>
+          <span class="ref-badge infra">Infrastructure</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>Segmentation mentioned but no VLAN architecture, routing rules, or traffic isolation defined.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>VLAN 10 (Mgmt), 20 (Call Center), 30 (Tourist – public-facing), 40 (Guest Wi-Fi – isolated). Tourist stations have no route to VLANs 10 or 20.</p></div>
+          </div>
+          <p class="ref-rationale">Without segmentation, a compromised tourist guide station — public-facing — could provide lateral movement access to call center and admin systems. Isolating public-facing systems is the single most impactful network security improvement at this scale.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">06</span><span class="ref-title">Employee Data Privacy Policy &amp; Consent</span>
+          <span class="ref-badge ethics">Ethics</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>No data privacy policy, consent process, classification framework, or retention schedule.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>Data Classification Policy (4 tiers). Personnel = Restricted. Written employee notices. Formal retention schedule with documented exceptions.</p></div>
+          </div>
+          <p class="ref-rationale">Employees deserve to know what data is collected about them and who can access it. This is not a compliance checkbox — it is respect for persons. The classification policy also makes access decisions clearer, creating friction that makes casual overreach less likely.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">07</span><span class="ref-title">Biometric Consent &amp; Alternative Access</span>
+          <span class="ref-badge ethics">Ethics</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>Mantrap with facial recognition documented. No consent, storage policy, or opt-out provisions.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>Written informed consent required. Biometric data in encrypted isolated database. Hardware key alternative available — no penalty for declining.</p></div>
+          </div>
+          <p class="ref-rationale">Requiring consent and providing a penalty-free alternative ensures security does not create a coercive employment condition. Security should protect people, not require them to surrender rights as a condition of employment.</p>
+        </div>
+      </div>
+
+      <div class="refinement-item">
+        <div class="refinement-header" onclick="toggleRef(this)">
+          <span class="ref-num">08</span><span class="ref-title">WCAG 2.1 AA Accessibility for Tourist Stations</span>
+          <span class="ref-badge ethics">Ethics</span><span style="color:var(--muted);font-size:1rem;margin-left:auto;">﹢</span>
+        </div>
+        <div class="refinement-body">
+          <div class="diff-row">
+            <div class="diff-before"><span class="diff-label">Before</span><p>Tourist guide interfaces not addressed for accessibility or multilingual support.</p></div>
+            <div class="diff-after"><span class="diff-label">After</span><p>WCAG 2.1 Level AA compliance required. Screen reader, keyboard nav, color contrast, multilingual (English/Japanese/Spanish). Included in deployment acceptance criteria.</p></div>
+          </div>
+          <p class="ref-rationale">Tourist stations serve the general public in Hawaii — a linguistically and demographically diverse context. A public-facing system inaccessible to visitors with disabilities fails its stated purpose. Accessibility is a condition of genuine public service, not an add-on.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+  <div class="section-inner">
+    <div class="section-label">Spiritual &amp; Professional Integration</div>
+    <h2 class="section-title">Reflective Experience</h2>
+    <div class="section-divider"></div>
+    <div class="reflection-card">
+      <p>This week's reflective activity was not a simulation — it was a lived experience. I attended the Bountiful Utah Temple, where my wife and I serve together as temple workers each week. We also visited the Salt Lake Temple Visitors' Center, where a detailed representation of the temple's interior rooms invites reflection on the architecture and purpose of those sacred spaces.</p>
+
+      <p>Serving as a temple worker is a different experience from attending as a patron. As a worker, your presence directly affects the experience of others. You are not there for yourself first. That responsibility sharpens the mind and softens the heart simultaneously — and it has taught me that consecration is not a dramatic, once-in-a-lifetime event. It is a quiet, weekly, unrecognized act of showing up.</p>
+
+      <p>At the Visitors' Center, I was struck by something I had not articulated before: the temple is designed to teach through environment. Every room, every symbol, every progression communicates something about the relationship between God and His children. That realization landed differently for me as someone who builds digital systems — every user interface I design also communicates something, consciously or not, about the values of the person who built it.</p>
+
+      <p>Elder Bednar's analogy of intertwined rope strands came to mind repeatedly (Bednar, 2018). The strands of doctrine, principle, and practice are strongest when woven together. I have spent three weeks in this course trying to articulate how my spiritual life and professional life are connected. This week, I did not have to try. President Nelson (2021) promised that making time for the Lord would not diminish our capacity but expand it. I have found that promise to be true — the temple is where I remember who I am, whose I am, and what the work is ultimately for.</p>
+
+      <p>As I build toward a career in AI and Automation Engineering, I carry from this experience a renewed conviction: the most important thing I will bring to any technical role is not my knowledge of machine learning frameworks or database design. It is the character built covenant by covenant, service session by service session — shaped by diligence, integrity, and consecrated service. That character is the foundation on which everything else in this portfolio rests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-inner">
+    <div class="section-label">Curriculum Vitae</div>
+    <h2 class="section-title">Résumé</h2>
+    <div class="section-divider"></div>
+
+    <div class="resume-section">
+      <div class="resume-section-title">Professional Summary</div>
+      <p style="color:var(--muted);font-size:0.93rem;line-height:1.85;">Results-driven IT professional with 8+ years of experience in technical support, SQL database management, and system administration. Pursuing a B.S. in IT at Ensign College. Bilingual (English/Spanish). Committed to ethical, service-oriented technology that improves people's lives.</p>
+    </div>
+
+    <div class="resume-section">
+      <div class="resume-section-title">Experience</div>
+      <div class="resume-entry">
+        <div class="resume-entry-header">
+          <h4>Technical Support Specialist</h4>
+          <span class="resume-entry-date">Sep 2017 – Present</span>
+        </div>
+        <div class="resume-entry-org">Totaltecnology.inc — Quito, Ecuador &amp; Remote</div>
+        <ul>
+          <li>Diagnosed and resolved 100+ hardware/software issues, improving system reliability</li>
+          <li>Managed and optimized SQL databases ensuring data integrity and performance</li>
+          <li>Implemented endpoint security measures: access controls, system hardening, updates</li>
+          <li>Provided bilingual technical support, improving international client resolution rates</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-header">
+          <h4>Full-Stack Web Developer (Capstone)</h4>
+          <span class="resume-entry-date">Apr – Sep 2024</span>
+        </div>
+        <div class="resume-entry-org">FUNDET Perú — Remote</div>
+        <ul>
+          <li>Built responsive full-stack web application using HTML5, CSS3, JavaScript, and back-end technologies</li>
+          <li>Implemented RESTful APIs and SQL database connectivity for dynamic data management</li>
+          <li>Collaborated in agile environment with iterative code reviews and feature deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <div class="resume-section-title">Education</div>
+      <div class="resume-entry">
+        <div class="resume-entry-header">
+          <h4>B.S. Applied Technology – Information Technology (System Administration)</h4>
+          <span class="resume-entry-date">2021 – 2026</span>
+        </div>
+        <div class="resume-entry-org">Ensign College, Salt Lake City, UT</div>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-header">
+          <h4>Full-Stack Web Developer Certificate</h4>
+          <span class="resume-entry-date">2024</span>
+        </div>
+        <div class="resume-entry-org">FUNDET Perú</div>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-header">
+          <h4>Engineer's Degree – Mechatronics, Robotics &amp; Automation Engineering</h4>
+          <span class="resume-entry-date">2017 – 2024</span>
+        </div>
+        <div class="resume-entry-org">Universidad de las Fuerzas Armadas – ESPE, Ecuador</div>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <div class="resume-section-title">Certifications</div>
+      <div class="skill-tags">
+        <span class="skill-tag">TestOut PC Pro</span>
+        <span class="skill-tag">TestOut Linux Pro</span>
+        <span class="skill-tag">TestOut Client Pro</span>
+        <span class="skill-tag">Business Writing Principles</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="section-divider" style="margin:1rem auto;"></div>
+    <p style="color:var(--muted);max-width:480px;margin:0 auto;">I'm open to opportunities in IT, AI &amp; automation, and full-stack development. Let's build something meaningful together.</p>
+    <div class="contact-links">
+      <a href="mailto:adri.esteb.96@gmail.com" class="contact-link">✉ adri.esteb.96@gmail.com</a>
+      <a href="https://linkedin.com/in/aesaltos2" target="_blank" class="contact-link">in LinkedIn</a>
+      <a href="https://github.com/aesaltos2" target="_blank" class="contact-link">⌥ GitHub</a>
+    </div>
+    <p class="contact-note">Building technology that serves people — Salt Lake City, Utah</p>
+  </div>
+</section>
+
+
+<footer>
+  <span>Adrian Saltos Salazar — IT 497 Capstone Portfolio</span>
+  <span>Ensign College · Spring 2025</span>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  const overlay = document.getElementById('navOverlay');
+
+  function openMenu() {
+    toggle.classList.add('open');
+    links.classList.add('open');
+    overlay.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    toggle.classList.remove('open');
+    links.classList.remove('open');
+    overlay.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    links.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  overlay.addEventListener('click', closeMenu);
+
+  // Close on link click
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  function toggleRef(header) {
+    const body = header.nextElementSibling;
+    const icon = header.querySelector('span:last-child');
+    body.classList.toggle('open');
+    if (icon) icon.textContent = body.classList.contains('open') ? '✕' : '﹢';
+  }
+
+</script>
+</body>
+</html>
