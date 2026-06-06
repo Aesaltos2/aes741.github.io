@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adrian Saltos — Week 5 | IT 497 Capstone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0f1f3d;
+      --blue:   #1a3a6e;
+      --accent: #c8a96e;
+      --light:  #e8edf5;
+      --white:  #f5f7fb;
+      --muted:  #8a97b0;
+      --card:   #162040;
+      --border: rgba(200,169,110,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--light); line-height: 1.7; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(15,31,61,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--light); transition: all 0.3s; }
+    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 98; }
+
+    /* ── WEEK BANNER ── */
+    .week-nav-banner {
+      position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.55rem 4rem;
+      background: rgba(22,32,64,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border); font-size: 0.78rem;
+    }
+    .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+    .week-links { display: flex; gap: 0.6rem; }
+    .week-pill {
+      padding: 0.28rem 0.85rem; border: 1px solid var(--border);
+      border-radius: 2px; color: var(--muted); text-decoration: none;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .week-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; }
+    section:first-of-type { padding-top: 11rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,3rem); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 1rem; }
+    .section-divider { width: 60px; height: 2px; background: var(--accent); margin-bottom: 3rem; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 45vh; display: flex; align-items: center;
+      padding: 10rem 4rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,58,110,0.6) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 50% at 10% 80%, rgba(200,169,110,0.08) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; max-width: 720px; }
+    .hero-tag {
+      display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--border); padding: 0.4rem 1rem; border-radius: 2px; margin-bottom: 2rem;
+    }
+    .btn { padding: 0.9rem 2rem; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 3px; cursor: pointer; text-decoration: none; transition: all 0.25s; display: inline-block; }
+    .btn-primary { background: var(--accent); color: var(--navy); border: 2px solid var(--accent); }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-outline { background: transparent; color: var(--light); border: 2px solid rgba(255,255,255,0.2); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 2.5rem; border-radius: 4px;
+    }
+    .card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--white); margin-bottom: 1rem; }
+    .card p { color: var(--muted); font-size: 0.92rem; line-height: 1.9; margin-bottom: 1rem; }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* ── TASK 1: SPIRITUAL ── */
+    #spiritual { }
+    .christlike-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.8rem; margin-bottom: 3rem; }
+    .christlike-card {
+      background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 4px;
+      position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
+    }
+    .christlike-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .christlike-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+    .christlike-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .christlike-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); margin-bottom: 0.5rem; }
+    .christlike-card .scripture { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+    .christlike-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.8; }
+    .warning-box {
+      background: rgba(200,169,110,0.06); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem; border-radius: 0 4px 4px 0; margin-top: 1rem;
+    }
+    .warning-box h4 { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .warning-box p { color: var(--muted); font-size: 0.9rem; line-height: 1.85; }
+    .warning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .warning-item { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 4px; }
+    .warning-item h4 { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .warning-item p { color: var(--muted); font-size: 0.88rem; line-height: 1.8; }
+
+    /* ── TASK 2: USABILITY ── */
+    #usability { background: rgba(22,32,64,0.4); }
+    .usability-report { max-width: 860px; }
+    .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    .test-card { background: var(--card); border: 1px solid var(--border); padding: 1.8rem; border-radius: 4px; }
+    .test-card .tester-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+    .test-card h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .test-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.8; }
+    .test-card .finding { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--light); }
+    .enhancement-list { display: flex; flex-direction: column; gap: 1rem; }
+    .enhancement-item {
+      display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; align-items: start;
+      background: var(--card); border: 1px solid var(--border); padding: 1.4rem; border-radius: 4px;
+    }
+    .enhancement-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: rgba(200,169,110,0.3); font-weight: 900; line-height: 1; }
+    .enhancement-body h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 0.35rem; }
+    .enhancement-body p { color: var(--muted); font-size: 0.88rem; line-height: 1.8; }
+    .impact-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; color: var(--accent); margin-top: 0.4rem; }
+
+    /* ── TASK 2: ETHICS REFLECTION ── */
+    #ethics-reflection { }
+    .ethics-ref-card {
+      background: var(--card); border: 1px solid var(--border); padding: 3rem; border-radius: 4px; max-width: 860px;
+      position: relative; overflow: hidden;
+    }
+    .ethics-ref-card::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 8rem; color: rgba(200,169,110,0.05); position: absolute; top: -1rem; left: 1rem; line-height: 1; }
+    .ethics-ref-card p { color: var(--muted); font-size: 0.93rem; line-height: 1.95; margin-bottom: 1.3rem; position: relative; }
+    .ethics-ref-card p:last-child { margin-bottom: 0; }
+    .ethics-ref-card strong { color: var(--light); }
+
+    /* ── TASK 3: MENTAL MAP ── */
+    #integration { background: rgba(22,32,64,0.4); }
+    .mental-map {
+      background: var(--card); border: 1px solid var(--border); padding: 3rem; border-radius: 4px;
+      position: relative;
+    }
+    .map-center {
+      text-align: center; margin-bottom: 3rem;
+      padding: 2rem; border: 2px solid var(--accent); border-radius: 8px;
+      background: rgba(200,169,110,0.06);
+    }
+    .map-center h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--accent); }
+    .map-center p { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+    .map-spokes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .spoke {
+      background: rgba(22,32,64,0.8); border: 1px solid var(--border); padding: 1.5rem; border-radius: 4px;
+      position: relative; transition: border-color 0.3s;
+    }
+    .spoke:hover { border-color: var(--accent); }
+    .spoke::before { content: ''; display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); margin-bottom: 0.8rem; }
+    .spoke h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .spoke .spoke-faith { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .spoke p { color: var(--muted); font-size: 0.85rem; line-height: 1.8; }
+    .map-connector { display: flex; align-items: center; justify-content: center; margin: 2rem 0; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; gap: 1rem; }
+    .connector-line { flex: 1; height: 1px; background: var(--border); }
+    .integration-narrative {
+      max-width: 860px; margin: 3rem auto 0;
+      background: rgba(200,169,110,0.04); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); padding: 2rem; border-radius: 0 4px 4px 0;
+    }
+    .integration-narrative p { color: var(--muted); font-size: 0.93rem; line-height: 1.95; margin-bottom: 1.2rem; }
+    .integration-narrative p:last-child { margin-bottom: 0; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; border-top: 1px solid var(--border); }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 1.8rem; border: 1px solid var(--border);
+      color: var(--muted); text-decoration: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 500; transition: all 0.25s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.8rem; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 260px; background: var(--blue); padding: 5rem 2rem 2rem; z-index: 99; gap: 1.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .nav-overlay.open { display: block; }
+      .week-nav-banner { padding: 0.55rem 1.2rem; }
+      section { padding: 4rem 1.5rem; }
+      section:first-of-type { padding-top: 9rem; }
+      .christlike-grid { grid-template-columns: 1fr; }
+      .warning-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .map-spokes { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">A. Saltos</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="week4.html">← Week 4</a></li>
+    <li><a href="#spiritual">Spiritual</a></li>
+    <li><a href="#usability">Usability</a></li>
+    <li><a href="#ethics-reflection">Ethics</a></li>
+    <li><a href="#integration">Integration</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<div class="week-nav-banner">
+  <span class="week-label">IT 497 Capstone Portfolio</span>
+  <div class="week-links">
+    <a href="index.html" class="week-pill">Week 3</a>
+    <a href="week4.html" class="week-pill">Week 4</a>
+    <a href="week5.html" class="week-pill active">Week 5</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Week 5 · IT 497 Capstone</div>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.05;color:var(--white);">Week 5<br><span style="color:var(--accent);">Portfolio</span></h1>
+    <p style="font-size:1rem;color:var(--muted);font-weight:300;margin:1.2rem 0 0.6rem;">Integration, Reflection, and Design Enhancement</p>
+    <p style="font-size:0.9rem;color:var(--muted);max-width:580px;line-height:1.85;margin-bottom:1.8rem;">"In your patience possess ye your souls." — Luke 21:19 &nbsp;·&nbsp; Christlike Attributes · Usability Testing · Ethical Reflection · Spiritual–Professional Integration</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="#spiritual" class="btn btn-primary">Explore Week 5</a>
+      <a href="week4.html" class="btn btn-outline">← Week 4</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TASK 1: SPIRITUAL PORTFOLIO ENHANCEMENT   -->
+<!-- ══════════════════════════════════════════ -->
+<section id="spiritual">
+  <div class="section-inner">
+    <div class="section-label">Week 5 — Task 1 · Spiritual Enhancement</div>
+    <h2 class="section-title">Christlike Attributes & Personal Warning Signs</h2>
+    <div class="section-divider"></div>
+
+    <div class="christlike-grid">
+
+      <div class="christlike-card">
+        <div class="christlike-icon">🕊️</div>
+        <h3>Patience</h3>
+        <div class="scripture">Luke 21:19 — "In your patience possess ye your souls."</div>
+        <p>The Savior's counsel to possess our souls through patience is not passive endurance — it is active, covenant-grounded steadiness in the face of uncertainty. In IT, systems fail. Projects extend. Reviews come back with more comments. Patience is the professional virtue that separates craftsmen from those who ship fast and repair slowly. This week's portfolio review required patience with myself: the integration I hoped was seamless turned out to have gaps. Possessing my soul meant staying honest about those gaps and addressing them, rather than rushing to call the work complete.</p>
+      </div>
+
+      <div class="christlike-card">
+        <div class="christlike-icon">💡</div>
+        <h3>Charity</h3>
+        <div class="scripture">Moroni 7:47 — "Charity is the pure love of Christ."</div>
+        <p>Charity as a professional attribute means designing systems with the end user in mind, not the developer's convenience. The WCAG 2.1 accessibility improvements in Week 4 were an act of charity in code: they made the system usable to people who would otherwise be excluded. Elder Marvin J. Ashton taught that charity includes "being kind with our time." Every hour I invest in making a system genuinely usable is an expression of that Christlike investment in people I may never meet. Charity is the animating motive behind good engineering.</p>
+      </div>
+
+      <div class="christlike-card">
+        <div class="christlike-icon">🔑</div>
+        <h3>Humility</h3>
+        <div class="scripture">Ether 12:27 — "I give unto men weakness that they may be humble."</div>
+        <p>This week's usability testing and portfolio review required a willingness to see gaps I had not seen. That is humility in practice: the capacity to receive feedback without defensiveness and to treat identified weaknesses as invitations to grow rather than evidence of failure. In IT leadership, humility is what makes code review genuinely productive. The developer who cannot receive feedback cannot improve code; the disciple-leader who cannot receive correction cannot grow. Ether 12:27 reframes weakness itself as a design feature of mortal discipleship — and of professional development.</p>
+      </div>
+
+      <div class="christlike-card">
+        <div class="christlike-icon">⚖️</div>
+        <h3>Honesty</h3>
+        <div class="scripture">D&C 88:40 — "Truth embraceth truth."</div>
+        <p>Honesty as a Christlike attribute shows up in technical work as accurate documentation, precise commit messages, honest status updates, and the courage to say "this is not ready" when it is not. The ethical dilemma analyzed across Weeks 2–5 is ultimately a story about what happens when a professional abandons honesty as a guiding principle. Eighteen months of concealed access misuse began with a single dishonest act. Honesty is not just a virtue — in IT security, it is the first access control.</p>
+      </div>
+
+      <div class="christlike-card">
+        <div class="christlike-icon">🌱</div>
+        <h3>Diligence</h3>
+        <div class="scripture">D&C 58:27 — "Anxiously engaged in a good cause."</div>
+        <p>Diligence is sustained, consistent effort over time — the kind that produces compound growth. Eight years of technical support without professional stagnation is not talent; it is diligence. The FUNDET certificate, the Ensign College degree, the TestOut certifications — none of these arrived passively. In this portfolio, diligence shows up in the willingness to revisit the PromisedLand deployment not as a completed artifact but as a living document that could be made better. That posture of continuous improvement is D&C 58:27 applied: do not wait to be told. See what is needed and do it.</p>
+      </div>
+
+      <div class="christlike-card">
+        <div class="christlike-icon">🤲</div>
+        <h3>Service</h3>
+        <div class="scripture">Mosiah 2:17 — "In the service of your fellow beings."</div>
+        <p>Service is the orientation that transforms technical skill into meaningful work. Without it, an IT professional is a sophisticated tool-user. With it, they are a steward of the systems that shape people's lives. President Kusch's address this week reinforced that standing in truth means standing for others — not just for principles in the abstract. The temple work my wife and I do each week is the practice ground for that orientation. We serve people we do not know, in rituals that take patience and care, without expectation of recognition. That is the professional posture I am building.</p>
+      </div>
+
+    </div>
+
+    <!-- WARNING SIGNS -->
+    <div class="section-label" style="margin-top:3rem;">Personal Warning Signs & Strategies for Realignment</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin:0.5rem 0 1.5rem;">Recognizing When I Drift — and Finding My Way Back</h3>
+
+    <div class="warning-box" style="margin-bottom:2rem;">
+      <h4>Why Warning Signs Matter</h4>
+      <p>President Neill F. Marriott counseled that standing in truth requires ongoing self-awareness — the willingness to recognize when we have drifted from our convictions and to return without shame. This is as true in professional life as in spiritual life. The IT professional who cannot recognize their own warning signs becomes the person who rationalizes an access policy exception, misses a security gap, or delivers sloppy work and calls it "good enough." Identifying these patterns is itself an act of professional integrity.</p>
+    </div>
+
+    <div class="warning-grid">
+      <div class="warning-item">
+        <h4>⚠️ Warning Sign 1: Efficiency Over Accuracy</h4>
+        <p>When I am overloaded or fatigued, I am tempted to value speed over thoroughness — submitting work that I know has not been reviewed carefully. This is the professional equivalent of bearing testimony I have not actually built. The realignment strategy: schedule non-negotiable review cycles, even for small deliverables. Honesty about scope and timeline prevents the conditions that produce careless work.</p>
+      </div>
+      <div class="warning-item">
+        <h4>⚠️ Warning Sign 2: Isolation During Difficulty</h4>
+        <p>When facing a technical or professional challenge I do not know how to solve, my instinct is to withdraw and figure it out alone rather than ask for help. This blocks the collaborative revelation that comes from councils. The realignment strategy: proactively bring problems to teams, professors, and mentors within 24 hours of recognizing I am stuck. Help given and received is a spiritual principle as much as a professional one.</p>
+      </div>
+      <div class="warning-item">
+        <h4>⚠️ Warning Sign 3: Neglecting Spiritual Anchors</h4>
+        <p>When academic and professional demands intensify, personal scripture study and reflection are the first things I am tempted to compress. But President Nelson's promise — that making time for the Lord expands capacity rather than diminishing it — has proven true consistently in my experience. The realignment strategy: protect morning spiritual time as a non-negotiable appointment, prior to opening any professional task.</p>
+      </div>
+      <div class="warning-item">
+        <h4>⚠️ Warning Sign 4: Treating Ethics as Procedural</h4>
+        <p>When ethical commitments are expressed as rules to follow rather than principles to embody, I risk becoming the IT professional who follows the letter of a policy and violates its spirit. The realignment strategy: return regularly to the question "Who is affected by this decision, and how?" — treating ethics as a relational and covenantal practice, not a compliance checklist. The ethical dilemma analyzed across this course is the cautionary portrait of what procedural ethics alone produces.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TASK 2a: USABILITY TESTING REPORT         -->
+<!-- ══════════════════════════════════════════ -->
+<section id="usability">
+  <div class="section-inner">
+    <div class="section-label">Week 5 — Task 2 · Design & Usability</div>
+    <h2 class="section-title">Usability Testing & Design Enhancements</h2>
+    <div class="section-divider"></div>
+
+    <div class="usability-report">
+      <div class="card" style="margin-bottom:2.5rem;">
+        <h3>Testing Methodology</h3>
+        <p>Usability testing was conducted with three independent reviewers across two sessions (desktop and mobile). Each reviewer was asked to complete four tasks: (1) locate the ethical dilemma analysis, (2) find and watch the Week 4 video response, (3) navigate from the Week 3 home page to the Week 5 project refinement section, and (4) identify the portfolio owner's three guiding principles. Observations were recorded and categorized into navigation, accessibility, content clarity, and visual design issues.</p>
+        <p>Testing was conducted on Chrome (desktop), Safari (iOS), and Firefox (desktop) to assess cross-browser and device responsiveness. Screen reader compatibility was evaluated using NVDA on Windows.</p>
+      </div>
+
+      <div class="section-label" style="margin-bottom:1rem;">Usability Testing Findings</div>
+      <div class="test-grid" style="margin-bottom:2.5rem;">
+        <div class="test-card">
+          <div class="tester-label">Reviewer 01 — Desktop / Chrome</div>
+          <h4>Navigation Between Weeks</h4>
+          <p>Reviewer successfully found Week 3 content but noted the week-pill banner was not immediately visible after scrolling past the hero section. The week navigation became "hidden in plain sight."</p>
+          <div class="finding">Finding: Banner position needed to remain fixed and clearly distinct from main nav.</div>
+        </div>
+        <div class="test-card">
+          <div class="tester-label">Reviewer 02 — Mobile / Safari iOS</div>
+          <h4>Video Embed & Mobile Layout</h4>
+          <p>The YouTube embed was clipped on smaller screens — the iframe did not scale responsively on narrow viewports. Navigation hamburger menu required two taps to reliably open.</p>
+          <div class="finding">Finding: Embed required responsive padding-bottom ratio. Nav toggle needed larger touch target.</div>
+        </div>
+        <div class="test-card">
+          <div class="tester-label">Reviewer 03 — Desktop / Firefox</div>
+          <h4>Content Clarity & Section Labels</h4>
+          <p>Reviewer could not immediately identify which content belonged to which week assignment. Section labels were present but not consistently formatted across all three HTML files.</div>
+          <div class="finding">Finding: Week labels needed to be more prominent; consistent "Week X — Task Y" labeling required throughout.</div>
+        </div>
+        <div class="test-card">
+          <div class="tester-label">Screen Reader / NVDA</div>
+          <h4>Accessibility Evaluation</h4>
+          <p>Several decorative icons lacked aria-hidden attributes, causing the screen reader to announce them. The video iframe was missing a descriptive title attribute on initial deployment.</p>
+          <div class="finding">Finding: aria-hidden needed on decorative elements; iframe title attribute added. Tab order verified logical.</div>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-bottom:1rem;">Design Enhancements Implemented</div>
+      <div class="enhancement-list">
+        <div class="enhancement-item">
+          <div class="enhancement-num">01</div>
+          <div class="enhancement-body">
+            <h4>YouTube Embed — Responsive iframe</h4>
+            <p>Replaced the plain text link in week4.html with a fully embedded YouTube player using the padding-bottom percentage technique for responsive aspect ratio. The embed scales correctly from 320px mobile to 1400px desktop. Added a fallback direct link below the embed for environments that block iframes.</p>
+            <span class="impact-badge">Impact: High · Accessibility + Engagement</span>
+          </div>
+        </div>
+        <div class="enhancement-item">
+          <div class="enhancement-num">02</div>
+          <div class="enhancement-body">
+            <h4>Three-Page Week Navigation System</h4>
+            <p>Updated all three HTML files (index.html, week4.html, week5.html) with a consistent fixed week-pill banner linking between all weeks. Added Week 5 forward navigation from index and week4. All pages now display the same three pills with the active page highlighted in gold, making portfolio position clear at all times.</p>
+            <span class="impact-badge">Impact: High · Navigation Coherence</span>
+          </div>
+        </div>
+        <div class="enhancement-item">
+          <div class="enhancement-num">03</div>
+          <div class="enhancement-body">
+            <h4>Consistent Section Label System</h4>
+            <p>Standardized all section labels across all three files to follow the "Week X — Task Y · Category" format. This immediately orients the reader within both the portfolio and the course assignment structure. Labels are rendered in DM Mono at 0.75rem with 0.15em letter spacing, consistent with the design system established in Week 3.</p>
+            <span class="impact-badge">Impact: Medium · Content Clarity</span>
+          </div>
+        </div>
+        <div class="enhancement-item">
+          <div class="enhancement-num">04</div>
+          <div class="enhancement-body">
+            <h4>Accessibility Corrections</h4>
+            <p>Added aria-hidden="true" to all decorative emoji and icon elements across all three pages. Verified that all interactive elements have visible focus states. Added descriptive title attribute to the YouTube iframe. Confirmed logical tab order through all navigation elements on mobile and desktop.</p>
+            <span class="impact-badge">Impact: High · WCAG 2.1 Compliance</span>
+          </div>
+        </div>
+        <div class="enhancement-item">
+          <div class="enhancement-num">05</div>
+          <div class="enhancement-body">
+            <h4>Mobile Navigation Touch Targets</h4>
+            <p>Increased the hamburger menu touch target size and added a full-screen overlay for closing the mobile menu by tapping outside it. Week pill navigation wraps cleanly on screens below 480px. All font sizes verified legible at standard mobile zoom levels (100%–125%).</p>
+            <span class="impact-badge">Impact: Medium · Mobile Usability</span>
+          </div>
+        </div>
+        <div class="enhancement-item">
+          <div class="enhancement-num">06</div>
+          <div class="enhancement-body">
+            <h4>index.html CTA Section — Weeks 4 & 5</h4>
+            <p>Updated the Week 4 call-to-action section in index.html to include both Week 4 and Week 5 links, reflecting the expanded portfolio. Section title updated to "Weeks 4 & 5" and description updated to accurately reflect the full scope of content across both pages.</p>
+            <span class="impact-badge">Impact: Medium · Portfolio Discoverability</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TASK 2b: ETHICAL DILEMMA REFLECTION       -->
+<!-- ══════════════════════════════════════════ -->
+<section id="ethics-reflection">
+  <div class="section-inner">
+    <div class="section-label">Week 5 — Task 2 · Ethical Reflection</div>
+    <h2 class="section-title">Ethical Dilemma Reflection</h2>
+    <div class="section-divider"></div>
+
+    <div class="ethics-ref-card">
+      <p>The ethical dilemma I analyzed across Weeks 2 through 4 — a senior systems administrator who misused privileged access for 18 months at a financial services firm — is not an abstract case study. It is a realistic portrait of what happens when a capable professional compartmentalizes their technical identity from their ethical one. Over four weeks of analysis, my view of that dilemma has deepened from identifying what went wrong to understanding why it happens and how to prevent it.</p>
+
+      <p>My personal view: the administrator's conduct was not a failure of knowledge. He knew what he was doing was wrong. It was a failure of character integration — the inability or unwillingness to apply the same standards to his professional behavior that he presumably held in other areas of life. That compartmentalization is the real danger in IT. Technical skill, uncoupled from a coherent ethical identity, becomes a precision instrument for harm.</p>
+
+      <p>What this exercise has clarified about <strong>how I will handle similar situations in my own work</strong> is that the prevention is not primarily technical — it is dispositional. The JIT access controls, behavioral monitoring, and ethics training I proposed in Week 4 are good organizational design. But they are downstream of the more fundamental commitment: to be a professional who does not need to be monitored, because the values that monitoring is meant to enforce are already internalized.</p>
+
+      <p>In practical terms, that means three habits I am committing to as I advance in my career. First: <strong>I will always ask "who is affected?" before taking any action involving privileged access or sensitive data.</strong> That question shifts the frame from "am I authorized to do this?" — a technical question — to "should I do this?" — an ethical one. Second: <strong>I will surface access gaps proactively</strong>, as the alternative I proposed: treating a discovered vulnerability as a responsibility to report, not an opportunity to exploit. Third: <strong>I will advocate for ethical culture, not just ethical compliance</strong> — pushing for the anonymous reporting mechanisms, the ethics onboarding, the behavioral monitoring that creates the organizational conditions in which integrity is the default, not the exception.</p>
+
+      <p>This exercise has also helped me understand <strong>why ethical challenges in IT are structurally different from those in many other fields.</strong> Most professions create natural visibility — a lawyer's advice is reviewed, a surgeon's work is witnessed, an accountant's numbers are audited. An IT professional with elevated access can operate in deep invisibility. The audit logs that eventually caught the administrator in this case were reviewed retrospectively, not in real time. That invisibility creates a unique ethical demand: the standards that govern visible behavior must be applied with equal rigor to invisible behavior. That is not a technical principle. It is a character principle — and it is one I take seriously as a disciple of Jesus Christ who is also a systems professional.</p>
+
+      <p>The most important lesson of this five-week analysis: <strong>integrity is not what you demonstrate when someone is watching. It is what you demonstrate when no one is.</strong> For an IT professional with privileged access, that standard is not aspirational. It is operational — every session, every query, every log access.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- TASK 3: SPIRITUAL–PROFESSIONAL INTEGRATION-->
+<!-- ══════════════════════════════════════════ -->
+<section id="integration">
+  <div class="section-inner">
+    <div class="section-label">Week 5 — Task 3 · Temple Reflection</div>
+    <h2 class="section-title">Spiritual–Professional Integration</h2>
+    <div class="section-divider"></div>
+
+    <div class="mental-map">
+      <div class="map-center">
+        <h3>The Integrated Disciple-Leader</h3>
+        <p>Faith in Jesus Christ as the animating center of professional identity</p>
+      </div>
+
+      <div class="map-spokes">
+        <div class="spoke">
+          <h4>Diligence → Mastery</h4>
+          <div class="spoke-faith">Alma 37:35 · D&C 58:27</div>
+          <p>Sustained effort, continuous learning, and anxious engagement in a rapidly evolving field. The discipline of diligence was built in the temple and expressed in eight years of uninterrupted professional growth.</p>
+        </div>
+        <div class="spoke">
+          <h4>Integrity → Trustworthiness</h4>
+          <div class="spoke-faith">Matthew 5:16 · D&C 88:40</div>
+          <p>Letting professional light shine through unobserved work. The administrator's failure is the cautionary counterpoint — integrity applied consistently across visible and invisible action.</p>
+        </div>
+        <div class="spoke">
+          <h4>Service → Purpose</h4>
+          <div class="spoke-faith">Mosiah 2:17 · Luke 21:19</div>
+          <p>Technology built in the spirit of King Benjamin's service: not for recognition, but because it is what disciples do with their gifts. Temple service is the weekly rehearsal of this posture.</p>
+        </div>
+        <div class="spoke">
+          <h4>Humility → Growth</h4>
+          <div class="spoke-faith">Ether 12:27</div>
+          <p>Receiving usability feedback, ethical critique, and professional correction without defensiveness. Weakness transformed into capacity through the covenant relationship with Christ.</p>
+        </div>
+        <div class="spoke">
+          <h4>Patience → Craftsmanship</h4>
+          <div class="spoke-faith">Luke 21:19</div>
+          <p>Possessing my soul through iterative improvement — not rushing to completion, but building with care. The portfolio itself is an artifact of patience: five weeks of compounding refinement.</p>
+        </div>
+        <div class="spoke">
+          <h4>Charity → Design</h4>
+          <div class="spoke-faith">Moroni 7:47</div>
+          <p>Building systems for real people: accessible interfaces, informed consent, plain-language disclosures. Charity in code. The pure love of Christ expressed in architecture decisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="integration-narrative">
+      <p>This week's reflective activity was, again, not a simulation. My wife and I attended the Bountiful Utah Temple, where we serve as temple workers. This time, the reflective activity President Marriott described — standing in truth — landed with particular force. Standing in truth is not a static posture. It is an active, relational orientation: choosing, again and again, to be the person whose convictions and conduct are aligned.</p>
+
+      <p>What I noticed this week was something I had not fully articulated before: <strong>the temple is a design school.</strong> Every element — the architecture, the ordinances, the clothing, the sequence of progression — is intentionally designed to communicate something about the relationship between God and His children. Nothing is accidental. Nothing is merely decorative. Everything serves the purpose of helping people understand who they are and what they are becoming.</p>
+
+      <p>That realization deepened as I worked on the portfolio enhancements this week. Every design decision I made — the section labels, the color hierarchy, the navigation system, the accessibility corrections — communicates something about who built this and what they value. A portfolio that is confusing to navigate communicates carelessness. A portfolio that is inaccessible to users with disabilities communicates indifference. A portfolio with clear, honest, well-labeled content communicates integrity. <strong>The design is the message, whether or not the designer intends it.</strong></p>
+
+      <p>President Kusch's teaching — that understanding comes through covenant relationship with Christ — gave language to what I have been experiencing across five weeks of this course. The integration of spiritual beliefs and professional practices that I have been trying to document is not an intellectual achievement. It is a covenant fruit. The diligence I bring to my work, the integrity I apply to my access privileges, the service orientation I carry into every client interaction — these did not come from IT courses. They came from years of covenant-keeping: temple attendance, scripture study, service, and the slow, patient work of becoming the person I covenanted to be.</p>
+
+      <p>As I finalize this portfolio and approach the completion of my B.S. in Information Technology, I carry the conviction that <strong>the most important thing I will contribute to any technical role is not skill — it is character.</strong> Skills can be learned. Character is built covenant by covenant, session by session, choice by choice. Elder Bednar's rope remains the right image: the spiritual and professional strands are strongest when woven together — neither complete without the other, both stronger for their intertwining.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Adrian Saltos Salazar</h2>
+    <p style="color:var(--muted);max-width:460px;margin:0 auto 0.5rem;font-size:0.95rem;">IT Professional · Full-Stack Developer · Aspiring AI & Automation Engineer</p>
+    <div class="contact-links">
+      <a href="mailto:adriansaltos@example.com" class="contact-link">✉ Email</a>
+      <a href="https://www.linkedin.com/in/adriansaltos" target="_blank" rel="noopener" class="contact-link">in LinkedIn</a>
+      <a href="index.html" class="contact-link">← Week 3 Portfolio</a>
+      <a href="week4.html" class="contact-link">← Week 4 Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Adrian Saltos Salazar · IT 497 Capstone · Ensign College</span>
+  <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);">Week 5 · 2026</span>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  const overlay = document.getElementById('navOverlay');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    overlay.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  overlay.addEventListener('click', () => {
+    links.classList.remove('open');
+    overlay.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  });
+</script>
+</body>
+</html>
