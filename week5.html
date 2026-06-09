@@ -609,7 +609,7 @@
 </footer>
 
 <script>
-  const toggle = document.getElementById('navToggle');
+   const toggle = document.getElementById('navToggle');
   const links  = document.getElementById('navLinks');
   const overlay = document.getElementById('navOverlay');
 
@@ -638,13 +638,6 @@
 
   // Close on Escape key
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-
-  function toggleRef(header) {
-    const body = header.nextElementSibling;
-    const icon = header.querySelector('span:last-child');
-    body.classList.toggle('open');
-    if (icon) icon.textContent = body.classList.contains('open') ? '✕' : '﹢';
-  }
 </script>
 </body>
 </html>
