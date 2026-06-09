@@ -32,6 +32,20 @@
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
+    .nav-toggle {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; background: none; border: none; cursor: pointer;
+      padding: 0.4rem; z-index: 200;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--accent); border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 98; }
 
     /* ── WEEK BANNER ── */
     .week-nav-banner {
@@ -195,37 +209,6 @@
     /* ── FOOTER ── */
     footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.8rem; }
 
-    /* ── HAMBURGER BUTTON ── */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.4rem;
-      z-index: 200;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .nav-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 140;
-    }
-   
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
@@ -288,7 +271,6 @@
 </nav>
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- WEEK BANNER -->
 <div class="week-nav-banner">
   <span class="week-label">IT 497 Capstone Portfolio</span>
   <div class="week-links">
@@ -607,7 +589,7 @@
 </footer>
 
 <script>
-   const toggle = document.getElementById('navToggle');
+  const toggle = document.getElementById('navToggle');
   const links  = document.getElementById('navLinks');
   const overlay = document.getElementById('navOverlay');
 
