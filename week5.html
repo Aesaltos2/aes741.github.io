@@ -195,39 +195,7 @@
     /* ── FOOTER ── */
     footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.8rem; }
 
-    /* ── HAMBURGER BUTTON ── */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.4rem;
-      z-index: 200;
-    }
-    .nav-toggle span {
-      width: 24px;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .nav-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 140;
-    }
-    .nav-overlay.open { display: block; }
-
-
-    /* ── MOBILE ── */
+     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-logo { font-size: 1rem; }
