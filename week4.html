@@ -52,6 +52,26 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
+    /* ── WEEK BANNER ── */
+    .week-nav-banner {
+      position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.55rem 4rem;
+      background: rgba(22,32,64,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border); font-size: 0.78rem;
+    }
+    .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+    .week-links { display: flex; gap: 0.6rem; }
+    .week-pill {
+      padding: 0.28rem 0.85rem; border: 1px solid var(--border);
+      border-radius: 2px; color: var(--muted); text-decoration: none;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .week-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
+
+
     /* ── HERO ── */
     #home {
       min-height: 100vh;
@@ -570,25 +590,6 @@
       .map-spokes { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
-
-    /* ── WEEK BANNER ── */
-    .week-nav-banner {
-      position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.55rem 4rem;
-      background: rgba(22,32,64,0.95); backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border); font-size: 0.78rem;
-    }
-    .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
-    .week-links { display: flex; gap: 0.6rem; }
-    .week-pill {
-      padding: 0.28rem 0.85rem; border: 1px solid var(--border);
-      border-radius: 2px; color: var(--muted); text-decoration: none;
-      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
-      transition: all 0.2s;
-    }
-    .week-pill:hover { border-color: var(--accent); color: var(--accent); }
-    .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
 
   </style>
 </head>
