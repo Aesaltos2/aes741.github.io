@@ -32,19 +32,8 @@
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
-    .nav-toggle {
-      display: none; flex-direction: column; justify-content: center;
-      gap: 5px; background: none; border: none; cursor: pointer;
-      padding: 0.4rem; z-index: 200;
-    }
-    .nav-toggle span {
-      display: block; width: 22px; height: 2px;
-      background: var(--accent); border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--light); transition: all 0.3s; }
     .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 98; }
 
     /* ── WEEK BANNER ── */
@@ -111,6 +100,7 @@
     .card p:last-child { margin-bottom: 0; }
 
     /* ── TASK 1: SPIRITUAL ── */
+    #spiritual { }
     .christlike-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.8rem; margin-bottom: 3rem; }
     .christlike-card {
       background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 4px;
@@ -153,6 +143,7 @@
     .impact-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; color: var(--accent); margin-top: 0.4rem; }
 
     /* ── TASK 2: ETHICS REFLECTION ── */
+    #ethics-reflection { }
     .ethics-ref-card {
       background: var(--card); border: 1px solid var(--border); padding: 3rem; border-radius: 4px; max-width: 860px;
       position: relative; overflow: hidden;
@@ -212,34 +203,8 @@
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-logo { font-size: 1rem; }
-            .nav-links {
-        position: fixed;
-        top: 0; right: -100%;
-        width: min(75vw, 300px);
-        height: 100dvh;
-        background: rgba(10,20,50,0.97);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0;
-        padding: 5rem 2.5rem 3rem;
-        border-left: 1px solid var(--border);
-        transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
-        z-index: 150;
-        list-style: none;
-      }
-      .nav-links.open { right: 0; }
-      .nav-links li { width: 100%; }
-      .nav-links a {
-        display: block;
-        font-size: 1rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid rgba(200,169,110,0.1);
-        letter-spacing: 0.06em;
-      }
-      .nav-links li:last-child a { border-bottom: none; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 260px; background: var(--blue); padding: 5rem 2rem 2rem; z-index: 99; gap: 1.5rem; }
+      .nav-links.open { display: flex; }
       .nav-toggle { display: flex; }
       .nav-overlay.open { display: block; }
       .week-nav-banner { padding: 0.55rem 1.2rem; }
@@ -277,6 +242,7 @@
     <a href="index.html" class="week-pill">Week 3</a>
     <a href="week4.html" class="week-pill">Week 4</a>
     <a href="week5.html" class="week-pill active">Week 5</a>
+    <a href="week6.html" class="week-pill">Week 6</a>
   </div>
 </div>
 
@@ -584,40 +550,24 @@
 </section>
 
 <footer>
-  <span>Adrian Saltos Salazar — IT 497 Capstone Portfolio</span>
-  <span>Ensign College · Spring 2025</span>
+  <span>Adrian Saltos Salazar · IT 497 Capstone · Ensign College</span>
+  <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);">Week 5 · 2026</span>
 </footer>
 
 <script>
   const toggle = document.getElementById('navToggle');
   const links  = document.getElementById('navLinks');
   const overlay = document.getElementById('navOverlay');
-
-  function openMenu() {
-    toggle.classList.add('open');
-    links.classList.add('open');
-    overlay.classList.add('open');
-    toggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    toggle.classList.remove('open');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    overlay.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  overlay.addEventListener('click', () => {
     links.classList.remove('open');
     overlay.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  toggle.addEventListener('click', () => {
-    links.classList.contains('open') ? closeMenu() : openMenu();
+    toggle.setAttribute('aria-expanded', false);
   });
-  overlay.addEventListener('click', closeMenu);
-
-  // Close on link click
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-  // Close on Escape key
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 </script>
 </body>
 </html>

@@ -35,12 +35,21 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem 4rem;
-      background: rgba(15,31,61,0.92); backdrop-filter: blur(12px);
+      background: rgba(15,31,61,0.92);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.04em; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
     .nav-links a:hover { color: var(--accent); }
 
     /* ── HERO ── */
@@ -175,6 +184,7 @@
     }
 
     /* ── PRINCIPLES ── */
+    #principles { }
     .principles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
     .principle-card {
       background: var(--card); border: 1px solid var(--border);
@@ -222,6 +232,7 @@
     }
 
     /* ── PROJECTS ── */
+    #projects { }
     .projects-list { display: flex; flex-direction: column; gap: 2.5rem; }
     .project-card {
       background: var(--card); border: 1px solid var(--border);
@@ -230,6 +241,7 @@
       transition: border-color 0.3s;
     }
     .project-card:hover { border-color: var(--accent); }
+    .project-meta { }
     .project-num {
       font-family: 'DM Mono', monospace; font-size: 0.75rem;
       color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.8rem;
@@ -279,6 +291,7 @@
     .ethics-section ul li { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.4rem; }
 
     /* ── REFLECTION ── */
+    #reflection { }
     .reflection-card {
       background: var(--card); border: 1px solid var(--border);
       padding: 3rem; border-radius: 4px; max-width: 860px;
@@ -376,6 +389,7 @@
     .agency-video-note p { color: var(--light); font-size: 0.9rem; line-height: 1.75; margin: 0; }
 
     /* ── SPIRITUAL EXPANSION ── */
+    #spiritual { }
     .spiritual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
     .spiritual-item {
       background: var(--card); border: 1px solid var(--border);
@@ -424,6 +438,7 @@
     .outcome-card.good strong { color: rgba(80,200,120,0.9); }
 
     /* ── PROJECT REFINEMENT REPORT ── */
+    #refinement { }
     .refinement-intro { background: var(--card); border: 1px solid var(--border);
       padding: 2rem 2.5rem; border-radius: 4px; margin-bottom: 2.5rem; max-width: 860px; }
     .refinement-intro p { color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 0.8rem; }
@@ -597,26 +612,24 @@
       footer { padding: 1.5rem 1.2rem; font-size: 0.75rem; }
     }
 
-    /* ── WEEK BANNER ── */
+    /* ── WEEK NAV BANNER ── */
     .week-nav-banner {
-      position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
+      background: rgba(200,169,110,0.07);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 4rem;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0.55rem 4rem;
-      background: rgba(22,32,64,0.95); backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border); font-size: 0.78rem;
+      flex-wrap: wrap; gap: 0.8rem;
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
     }
-    .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
-    .week-links { display: flex; gap: 0.6rem; }
+    .week-nav-banner .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+    .week-nav-banner .week-links { display: flex; gap: 0.6rem; }
     .week-pill {
-      padding: 0.28rem 0.85rem; border: 1px solid var(--border);
-      border-radius: 2px; color: var(--muted); text-decoration: none;
-      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
-      transition: all 0.2s;
+      padding: 0.35rem 1rem; border-radius: 2px; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase;
+      transition: all 0.2s; border: 1px solid var(--border); color: var(--muted);
     }
     .week-pill:hover { border-color: var(--accent); color: var(--accent); }
     .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
-
-    
     @media (max-width: 480px) {
       .week-nav-banner { padding: 0.6rem 1.2rem; }
     }
@@ -640,6 +653,8 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#ethics">Ethics</a></li>
     <li><a href="week4.html">Week 4 →</a></li>
+    <li><a href="week5.html">Week 5 →</a></li>
+    <li><a href="week6.html">Week 6 →</a></li>
     <li><a href="#resume">Résumé</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -653,6 +668,7 @@
     <a href="index.html" class="week-pill active">Week 3</a>
     <a href="week4.html" class="week-pill">Week 4</a>
     <a href="week5.html" class="week-pill">Week 5</a>
+    <a href="week6.html" class="week-pill">Week 6</a>
   </div>
 </div>
 
@@ -916,14 +932,11 @@
 
 <!-- WEEK 4 CTA -->
 <section id="week4-cta" style="background:rgba(22,32,64,0.6);padding:4rem;text-align:center;border-top:1px solid var(--border);">
-  <div class="section-inner" style="max-width:700px;">
+  <div class="section-inner" style="max-width:600px;">
     <div class="section-label">Continue the Portfolio</div>
-    <h2 class="section-title" style="margin-bottom:1rem;">Weeks 4 & 5</h2>
-    <p style="color:var(--muted);margin-bottom:2rem;line-height:1.8;">Spiritual growth, agency reflection, ethical analysis, project refinement, Christlike attributes, usability testing, and spiritual–professional integration — across the Week 4 and Week 5 sections.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="week4.html" class="btn btn-primary" style="display:inline-block;">View Week 4 →</a>
-      <a href="week5.html" class="btn btn-primary" style="display:inline-block;">View Week 5 →</a>
-    </div>
+    <h2 class="section-title" style="margin-bottom:1rem;">Week 4 Content</h2>
+    <p style="color:var(--muted);margin-bottom:2rem;line-height:1.8;">Spiritual growth, agency reflection, ethical analysis, project refinement report, and more — all in the Week 4 section.</p>
+    <a href="week4.html" class="btn btn-primary" style="display:inline-block;">View Week 4 →</a>
   </div>
 </section>
 
@@ -1021,6 +1034,10 @@
   </div>
 </section>
 
+<footer>
+  <span>Adrian Saltos Salazar — IT 497 Capstone Portfolio</span>
+  <span>Ensign College · Spring 2025</span>
+</footer>
 <footer>
   <span>Adrian Saltos Salazar — IT 497 Capstone Portfolio</span>
   <span>Ensign College · Spring 2025</span>

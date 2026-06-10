@@ -52,26 +52,6 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── WEEK BANNER ── */
-    .week-nav-banner {
-      position: fixed; top: 65px; left: 0; right: 0; z-index: 99;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.55rem 4rem;
-      background: rgba(22,32,64,0.95); backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border); font-size: 0.78rem;
-    }
-    .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
-    .week-links { display: flex; gap: 0.6rem; }
-    .week-pill {
-      padding: 0.28rem 0.85rem; border: 1px solid var(--border);
-      border-radius: 2px; color: var(--muted); text-decoration: none;
-      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
-      transition: all 0.2s;
-    }
-    .week-pill:hover { border-color: var(--accent); color: var(--accent); }
-    .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
-
-
     /* ── HERO ── */
     #home {
       min-height: 100vh;
@@ -204,6 +184,7 @@
     }
 
     /* ── PRINCIPLES ── */
+    #principles { }
     .principles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
     .principle-card {
       background: var(--card); border: 1px solid var(--border);
@@ -251,6 +232,7 @@
     }
 
     /* ── PROJECTS ── */
+    #projects { }
     .projects-list { display: flex; flex-direction: column; gap: 2.5rem; }
     .project-card {
       background: var(--card); border: 1px solid var(--border);
@@ -259,6 +241,7 @@
       transition: border-color 0.3s;
     }
     .project-card:hover { border-color: var(--accent); }
+    .project-meta { }
     .project-num {
       font-family: 'DM Mono', monospace; font-size: 0.75rem;
       color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.8rem;
@@ -308,6 +291,7 @@
     .ethics-section ul li { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.4rem; }
 
     /* ── REFLECTION ── */
+    #reflection { }
     .reflection-card {
       background: var(--card); border: 1px solid var(--border);
       padding: 3rem; border-radius: 4px; max-width: 860px;
@@ -426,6 +410,7 @@
     }
 
     /* ── SPIRITUAL EXPANSION ── */
+    #spiritual { }
     .spiritual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
     .spiritual-item {
       background: var(--card); border: 1px solid var(--border);
@@ -474,6 +459,7 @@
     .outcome-card.good strong { color: rgba(80,200,120,0.9); }
 
     /* ── PROJECT REFINEMENT REPORT ── */
+    #refinement { }
     .refinement-intro { background: var(--card); border: 1px solid var(--border);
       padding: 2rem 2.5rem; border-radius: 4px; margin-bottom: 2.5rem; max-width: 860px; }
     .refinement-intro p { color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 0.8rem; }
@@ -547,11 +533,11 @@
     }
     .nav-overlay.open { display: block; }
 
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
+    /* ── RESPONSIVE — TABLET ── */
+    @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-logo { font-size: 1rem; }
+      .nav-toggle { display: flex; }
+
       .nav-links {
         position: fixed;
         top: 0; right: -100%;
@@ -579,49 +565,94 @@
         letter-spacing: 0.06em;
       }
       .nav-links li:last-child a { border-bottom: none; }
-      .nav-toggle { display: flex; }
-      .nav-overlay.open { display: block; }
 
-      /* ── BANNER & SECTIONS ── */
-      .week-nav-banner { padding: 0.55rem 1.2rem; }
       section { padding: 4rem 1.5rem; }
-      section:first-of-type { padding-top: 9rem; }
+      #home { padding: 7rem 1.5rem 4rem; }
+      #contact { padding: 4rem 1.5rem; }
 
-      /* ── ABOUT ── */
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-
-      /* ── PRINCIPLES ── */
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .principles-grid { grid-template-columns: 1fr; }
-
-      /* ── SKILLS ── */
       .skills-grid { grid-template-columns: 1fr; }
-
-      /* ── PROJECTS ── */
       .project-card { grid-template-columns: 1fr; gap: 1.5rem; }
 
-      /* ── AGENCY ── */
-      .agency-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+      .hero-cta .btn { text-align: center; min-width: 200px; }
 
-      /* ── ETHICS ALT ── */
-      .outcome-grid { grid-template-columns: 1fr; }
-
-      /* ── REFINEMENT DIFF ── */
-      .diff-row { grid-template-columns: 1fr; }
-
-      /* ── COMPETENCY ── */
-      .competency-grid { grid-template-columns: 1fr 1fr; }
-
-      /* ── SPIRITUAL ── */
+      .agency-grid { grid-template-columns: 1fr; }
       .spiritual-grid { grid-template-columns: 1fr; }
+      .competency-grid { grid-template-columns: 1fr; }
+      .outcome-grid { grid-template-columns: 1fr; }
+      .diff-row { grid-template-columns: 1fr; }
+      .alt-card, .refinement-intro { padding: 2rem 1.5rem; }
+      .refinement-header { flex-wrap: wrap; gap: 0.6rem; }
 
-      /* ── FOOTER ── */
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+      .contact-links { flex-direction: column; align-items: center; }
+
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
     }
 
+    /* ── RESPONSIVE — MOBILE ── */
     @media (max-width: 480px) {
-      .competency-grid { grid-template-columns: 1fr; }
-      .week-nav-banner { padding: 0.55rem 1.2rem; }
-      .principles-row { flex-direction: column; }
+      nav { padding: 0.9rem 1.2rem; }
+      .nav-logo { font-size: 1rem; }
+
+      section { padding: 3.5rem 1.2rem; }
+      #home { padding: 6rem 1.2rem 3.5rem; }
+      #contact { padding: 3.5rem 1.2rem; }
+
+      .hero-tag { font-size: 0.7rem; padding: 0.3rem 0.75rem; }
+      .hero-sub { font-size: 0.93rem; }
+
+      .section-title { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+      .section-divider { margin-bottom: 2rem; }
+
+      .principle-card { padding: 2rem 1.4rem; }
+      .principle-num { font-size: 2.8rem; }
+      .skill-group { padding: 1.5rem 1.2rem; }
+      .about-card { padding: 1.8rem 1.4rem; }
+
+      .project-card { padding: 1.8rem 1.2rem; }
+      .project-faith { padding: 0.8rem 1rem; }
+
+      .ethics-card, .reflection-card { padding: 1.8rem 1.2rem; }
+
+      .resume-entry-header { flex-direction: column; gap: 0.15rem; }
+      .resume-download { padding: 1.2rem 1.8rem; }
+
+      .btn { padding: 0.85rem 1.5rem; font-size: 0.82rem; width: 100%; }
+      .hero-cta .btn { min-width: unset; }
+
+      .contact-link { width: 100%; max-width: 280px; justify-content: center; }
+
+      footer { padding: 1.5rem 1.2rem; font-size: 0.75rem; }
+    }
+
+    /* ── WEEK NAV BANNER ── */
+    .week-nav-banner {
+      background: rgba(200,169,110,0.07);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.8rem;
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    }
+    .week-nav-banner .week-label { color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+    .week-nav-banner .week-links { display: flex; gap: 0.6rem; }
+    .week-pill {
+      padding: 0.35rem 1rem; border-radius: 2px; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase;
+      transition: all 0.2s; border: 1px solid var(--border); color: var(--muted);
+    }
+    .week-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .week-pill.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
+    @media (max-width: 480px) {
+      .week-nav-banner { padding: 0.6rem 1.2rem; }
     }
 
   </style>
@@ -643,7 +674,6 @@
     <li><a href="#refinement">Refinement</a></li>
     <li><a href="#reflection">Reflection</a></li>
     <li><a href="#resume">Résumé</a></li>
-    <li><a href="week5.html">Week 5 →</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -656,6 +686,7 @@
     <a href="index.html" class="week-pill">Week 3</a>
     <a href="week4.html" class="week-pill active">Week 4</a>
     <a href="week5.html" class="week-pill">Week 5</a>
+    <a href="week6.html" class="week-pill">Week 6</a>
   </div>
 </div>
 
@@ -778,23 +809,17 @@
       </div>
     </div>
       <div class="agency-video-note">
-        <span>📹 Video Response — Week 4 Reflection</span>
-        <p>A video response capturing these reflections on agency, the development journey, and the integration of spiritual and professional principles — recorded for IT 497 Week 4.</p>
-        <div style="margin-top:1.4rem;">
-          <div style="position:relative;width:100%;max-width:680px;padding-bottom:38.25%;height:0;border-radius:6px;overflow:hidden;box-shadow:0 6px 32px rgba(0,0,0,0.5);border:1px solid var(--border);">
-            <iframe
-              src="https://www.youtube.com/embed/KykvoPJZSLo"
-              title="IT 497 Week 4 Video Response – Adrian Saltos Salazar"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              style="position:absolute;top:0;left:0;width:100%;height:100%;">
-            </iframe>
-          </div>
-          <a href="https://youtu.be/KykvoPJZSLo" target="_blank" rel="noopener noreferrer" class="video-btn" style="margin-top:0.85rem;">
-            ▶ youtu.be/KykvoPJZSLo
-          </a>
-        </div>
+        <span>📹 Video Response</span>
+        <p>
+          A 2.5–5 minute video response capturing these reflections on agency, the development journey, and the integration of spiritual and professional principles has been recorded and submitted through the Canvas course platform per Week 4 instructions.
+        </p>
+      
+        <a href="https://www.youtube.com/watch?v=KykvoPJZSLo"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="video-btn">
+           Watch Video Reflection →
+        </a>
       </div>
     </div>
 </section>
